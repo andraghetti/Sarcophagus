@@ -85,17 +85,19 @@ class GameViewController: UIViewController {
             SCNTransaction.begin()
             SCNTransaction.setAnimationDuration(0.5)
             
-            // on completion - unhighlight
+            let pickedColor = UIColor.greenColor()
+            
+            // on completion - keep Color
             SCNTransaction.setCompletionBlock {
                 SCNTransaction.begin()
                 SCNTransaction.setAnimationDuration(0.5)
                 
-                material.emission.contents = UIColor.blackColor()
+                material.emission.contents = pickedColor
                 
                 SCNTransaction.commit()
             }
             
-            material.emission.contents = UIColor.redColor()
+            material.emission.contents = pickedColor
             
             SCNTransaction.commit()
         }
