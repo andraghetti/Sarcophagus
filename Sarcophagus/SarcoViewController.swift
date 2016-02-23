@@ -1,5 +1,5 @@
 //
-//  GameViewController.swift
+//  SarcoViewController.swift
 //  Sarcophagus
 //
 //  Created by Andraghetti on 23/02/16.
@@ -10,7 +10,7 @@ import UIKit
 import QuartzCore
 import SceneKit
 
-class GameViewController: UIViewController {
+class SarcoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,7 +104,7 @@ class GameViewController: UIViewController {
     }
     
     override func shouldAutorotate() -> Bool {
-        return true
+        return false
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -112,16 +112,14 @@ class GameViewController: UIViewController {
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return .AllButUpsideDown
-        } else {
-            return .All
-        }
+        return .Landscape
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
+        
+        print("MEMORY WARNING ‼️‼️")
     }
 
 }

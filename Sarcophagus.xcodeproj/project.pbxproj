@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		99AF099E1C7C7A320002444B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AF099D1C7C7A320002444B /* AppDelegate.swift */; };
 		99AF09A01C7C7A320002444B /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 99AF099F1C7C7A320002444B /* art.scnassets */; };
-		99AF09A21C7C7A320002444B /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AF09A11C7C7A320002444B /* GameViewController.swift */; };
+		99AF09A21C7C7A320002444B /* SarcoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AF09A11C7C7A320002444B /* SarcoViewController.swift */; };
 		99AF09A51C7C7A320002444B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99AF09A31C7C7A320002444B /* Main.storyboard */; };
 		99AF09A71C7C7A320002444B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99AF09A61C7C7A320002444B /* Assets.xcassets */; };
 		99AF09AA1C7C7A320002444B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99AF09A81C7C7A320002444B /* LaunchScreen.storyboard */; };
@@ -30,7 +30,7 @@
 		99AF099A1C7C7A320002444B /* Sarcophagus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sarcophagus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99AF099D1C7C7A320002444B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99AF099F1C7C7A320002444B /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		99AF09A11C7C7A320002444B /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		99AF09A11C7C7A320002444B /* SarcoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SarcoViewController.swift; sourceTree = "<group>"; };
 		99AF09A41C7C7A320002444B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		99AF09A61C7C7A320002444B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		99AF09A91C7C7A320002444B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -81,7 +81,7 @@
 			children = (
 				99AF099D1C7C7A320002444B /* AppDelegate.swift */,
 				99AF099F1C7C7A320002444B /* art.scnassets */,
-				99AF09A11C7C7A320002444B /* GameViewController.swift */,
+				99AF09A11C7C7A320002444B /* SarcoViewController.swift */,
 				99AF09A31C7C7A320002444B /* Main.storyboard */,
 				99AF09A61C7C7A320002444B /* Assets.xcassets */,
 				99AF09A81C7C7A320002444B /* LaunchScreen.storyboard */,
@@ -203,7 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99AF09A21C7C7A320002444B /* GameViewController.swift in Sources */,
+				99AF09A21C7C7A320002444B /* SarcoViewController.swift in Sources */,
 				99AF099E1C7C7A320002444B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
