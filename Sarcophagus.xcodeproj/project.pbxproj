@@ -7,35 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		99AF09B51C7C7A330002444B /* SarcophagusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AF09B41C7C7A330002444B /* SarcophagusTests.swift */; };
+		992C0FAE1C7DBEEF00B3E479 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992C0FAD1C7DBEEF00B3E479 /* AppDelegate.swift */; };
+		992C0FB01C7DBEEF00B3E479 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 992C0FAF1C7DBEEF00B3E479 /* art.scnassets */; };
+		992C0FB21C7DBEEF00B3E479 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992C0FB11C7DBEEF00B3E479 /* GameViewController.swift */; };
+		992C0FB51C7DBEEF00B3E479 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 992C0FB31C7DBEEF00B3E479 /* Main.storyboard */; };
+		992C0FB71C7DBEEF00B3E479 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 992C0FB61C7DBEEF00B3E479 /* Assets.xcassets */; };
+		992C0FC51C7DBEEF00B3E479 /* SarcophagusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992C0FC41C7DBEEF00B3E479 /* SarcophagusTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		99AF09B11C7C7A330002444B /* PBXContainerItemProxy */ = {
+		992C0FC11C7DBEEF00B3E479 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 99AF09921C7C7A320002444B /* Project object */;
+			containerPortal = 992C0FA21C7DBEEF00B3E479 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 99AF09991C7C7A320002444B;
+			remoteGlobalIDString = 992C0FA91C7DBEEF00B3E479;
 			remoteInfo = Sarcophagus;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		99AF099A1C7C7A320002444B /* Sarcophagus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sarcophagus.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		99AF09B01C7C7A330002444B /* SarcophagusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SarcophagusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		99AF09B41C7C7A330002444B /* SarcophagusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SarcophagusTests.swift; sourceTree = "<group>"; };
-		99AF09B61C7C7A330002444B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		992C0FAA1C7DBEEF00B3E479 /* Sarcophagus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sarcophagus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		992C0FAD1C7DBEEF00B3E479 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		992C0FAF1C7DBEEF00B3E479 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		992C0FB11C7DBEEF00B3E479 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		992C0FB41C7DBEEF00B3E479 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		992C0FB61C7DBEEF00B3E479 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		992C0FBB1C7DBEEF00B3E479 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		992C0FC01C7DBEEF00B3E479 /* SarcophagusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SarcophagusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		992C0FC41C7DBEEF00B3E479 /* SarcophagusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SarcophagusTests.swift; sourceTree = "<group>"; };
+		992C0FC61C7DBEEF00B3E479 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		99AF09971C7C7A320002444B /* Frameworks */ = {
+		992C0FA71C7DBEEF00B3E479 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		99AF09AD1C7C7A330002444B /* Frameworks */ = {
+		992C0FBD1C7DBEEF00B3E479 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -45,36 +56,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		99AF09911C7C7A320002444B = {
+		992C0FA11C7DBEEF00B3E479 = {
 			isa = PBXGroup;
 			children = (
-				99AF099C1C7C7A320002444B /* Sarcophagus */,
-				99AF09B31C7C7A330002444B /* SarcophagusTests */,
-				99AF099B1C7C7A320002444B /* Products */,
+				992C0FAC1C7DBEEF00B3E479 /* Sarcophagus */,
+				992C0FC31C7DBEEF00B3E479 /* SarcophagusTests */,
+				992C0FAB1C7DBEEF00B3E479 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		99AF099B1C7C7A320002444B /* Products */ = {
+		992C0FAB1C7DBEEF00B3E479 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				99AF099A1C7C7A320002444B /* Sarcophagus.app */,
-				99AF09B01C7C7A330002444B /* SarcophagusTests.xctest */,
+				992C0FAA1C7DBEEF00B3E479 /* Sarcophagus.app */,
+				992C0FC01C7DBEEF00B3E479 /* SarcophagusTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		99AF099C1C7C7A320002444B /* Sarcophagus */ = {
+		992C0FAC1C7DBEEF00B3E479 /* Sarcophagus */ = {
 			isa = PBXGroup;
 			children = (
+				992C0FAD1C7DBEEF00B3E479 /* AppDelegate.swift */,
+				992C0FAF1C7DBEEF00B3E479 /* art.scnassets */,
+				992C0FB11C7DBEEF00B3E479 /* GameViewController.swift */,
+				992C0FB31C7DBEEF00B3E479 /* Main.storyboard */,
+				992C0FB61C7DBEEF00B3E479 /* Assets.xcassets */,
+				992C0FBB1C7DBEEF00B3E479 /* Info.plist */,
 			);
 			path = Sarcophagus;
 			sourceTree = "<group>";
 		};
-		99AF09B31C7C7A330002444B /* SarcophagusTests */ = {
+		992C0FC31C7DBEEF00B3E479 /* SarcophagusTests */ = {
 			isa = PBXGroup;
 			children = (
-				99AF09B41C7C7A330002444B /* SarcophagusTests.swift */,
-				99AF09B61C7C7A330002444B /* Info.plist */,
+				992C0FC41C7DBEEF00B3E479 /* SarcophagusTests.swift */,
+				992C0FC61C7DBEEF00B3E479 /* Info.plist */,
 			);
 			path = SarcophagusTests;
 			sourceTree = "<group>";
@@ -82,13 +99,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		99AF09991C7C7A320002444B /* Sarcophagus */ = {
+		992C0FA91C7DBEEF00B3E479 /* Sarcophagus */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 99AF09B91C7C7A330002444B /* Build configuration list for PBXNativeTarget "Sarcophagus" */;
+			buildConfigurationList = 992C0FC91C7DBEEF00B3E479 /* Build configuration list for PBXNativeTarget "Sarcophagus" */;
 			buildPhases = (
-				99AF09961C7C7A320002444B /* Sources */,
-				99AF09971C7C7A320002444B /* Frameworks */,
-				99AF09981C7C7A320002444B /* Resources */,
+				992C0FA61C7DBEEF00B3E479 /* Sources */,
+				992C0FA71C7DBEEF00B3E479 /* Frameworks */,
+				992C0FA81C7DBEEF00B3E479 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -96,49 +113,49 @@
 			);
 			name = Sarcophagus;
 			productName = Sarcophagus;
-			productReference = 99AF099A1C7C7A320002444B /* Sarcophagus.app */;
+			productReference = 992C0FAA1C7DBEEF00B3E479 /* Sarcophagus.app */;
 			productType = "com.apple.product-type.application";
 		};
-		99AF09AF1C7C7A330002444B /* SarcophagusTests */ = {
+		992C0FBF1C7DBEEF00B3E479 /* SarcophagusTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 99AF09BC1C7C7A330002444B /* Build configuration list for PBXNativeTarget "SarcophagusTests" */;
+			buildConfigurationList = 992C0FCC1C7DBEEF00B3E479 /* Build configuration list for PBXNativeTarget "SarcophagusTests" */;
 			buildPhases = (
-				99AF09AC1C7C7A330002444B /* Sources */,
-				99AF09AD1C7C7A330002444B /* Frameworks */,
-				99AF09AE1C7C7A330002444B /* Resources */,
+				992C0FBC1C7DBEEF00B3E479 /* Sources */,
+				992C0FBD1C7DBEEF00B3E479 /* Frameworks */,
+				992C0FBE1C7DBEEF00B3E479 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				99AF09B21C7C7A330002444B /* PBXTargetDependency */,
+				992C0FC21C7DBEEF00B3E479 /* PBXTargetDependency */,
 			);
 			name = SarcophagusTests;
 			productName = SarcophagusTests;
-			productReference = 99AF09B01C7C7A330002444B /* SarcophagusTests.xctest */;
+			productReference = 992C0FC01C7DBEEF00B3E479 /* SarcophagusTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		99AF09921C7C7A320002444B /* Project object */ = {
+		992C0FA21C7DBEEF00B3E479 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Lorenzo Andraghetti";
 				TargetAttributes = {
-					99AF09991C7C7A320002444B = {
+					992C0FA91C7DBEEF00B3E479 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 8TFU94AQ5S;
 					};
-					99AF09AF1C7C7A330002444B = {
+					992C0FBF1C7DBEEF00B3E479 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 8TFU94AQ5S;
-						TestTargetID = 99AF09991C7C7A320002444B;
+						TestTargetID = 992C0FA91C7DBEEF00B3E479;
 					};
 				};
 			};
-			buildConfigurationList = 99AF09951C7C7A320002444B /* Build configuration list for PBXProject "Sarcophagus" */;
+			buildConfigurationList = 992C0FA51C7DBEEF00B3E479 /* Build configuration list for PBXProject "Sarcophagus" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -146,26 +163,29 @@
 				en,
 				Base,
 			);
-			mainGroup = 99AF09911C7C7A320002444B;
-			productRefGroup = 99AF099B1C7C7A320002444B /* Products */;
+			mainGroup = 992C0FA11C7DBEEF00B3E479;
+			productRefGroup = 992C0FAB1C7DBEEF00B3E479 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				99AF09991C7C7A320002444B /* Sarcophagus */,
-				99AF09AF1C7C7A330002444B /* SarcophagusTests */,
+				992C0FA91C7DBEEF00B3E479 /* Sarcophagus */,
+				992C0FBF1C7DBEEF00B3E479 /* SarcophagusTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		99AF09981C7C7A320002444B /* Resources */ = {
+		992C0FA81C7DBEEF00B3E479 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				992C0FB01C7DBEEF00B3E479 /* art.scnassets in Resources */,
+				992C0FB71C7DBEEF00B3E479 /* Assets.xcassets in Resources */,
+				992C0FB51C7DBEEF00B3E479 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		99AF09AE1C7C7A330002444B /* Resources */ = {
+		992C0FBE1C7DBEEF00B3E479 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -175,33 +195,46 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		99AF09961C7C7A320002444B /* Sources */ = {
+		992C0FA61C7DBEEF00B3E479 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				992C0FB21C7DBEEF00B3E479 /* GameViewController.swift in Sources */,
+				992C0FAE1C7DBEEF00B3E479 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		99AF09AC1C7C7A330002444B /* Sources */ = {
+		992C0FBC1C7DBEEF00B3E479 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99AF09B51C7C7A330002444B /* SarcophagusTests.swift in Sources */,
+				992C0FC51C7DBEEF00B3E479 /* SarcophagusTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		99AF09B21C7C7A330002444B /* PBXTargetDependency */ = {
+		992C0FC21C7DBEEF00B3E479 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 99AF09991C7C7A320002444B /* Sarcophagus */;
-			targetProxy = 99AF09B11C7C7A330002444B /* PBXContainerItemProxy */;
+			target = 992C0FA91C7DBEEF00B3E479 /* Sarcophagus */;
+			targetProxy = 992C0FC11C7DBEEF00B3E479 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		992C0FB31C7DBEEF00B3E479 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				992C0FB41C7DBEEF00B3E479 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
-		99AF09B71C7C7A330002444B /* Debug */ = {
+		992C0FC71C7DBEEF00B3E479 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -246,7 +279,7 @@
 			};
 			name = Debug;
 		};
-		99AF09B81C7C7A330002444B /* Release */ = {
+		992C0FC81C7DBEEF00B3E479 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -284,29 +317,29 @@
 			};
 			name = Release;
 		};
-		99AF09BA1C7C7A330002444B /* Debug */ = {
+		992C0FCA1C7DBEEF00B3E479 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Sarcophagus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Lorenzo-Andraghetti.Sarcophagus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
-		99AF09BB1C7C7A330002444B /* Release */ = {
+		992C0FCB1C7DBEEF00B3E479 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Sarcophagus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Lorenzo-Andraghetti.Sarcophagus";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
-		99AF09BD1C7C7A330002444B /* Debug */ = {
+		992C0FCD1C7DBEEF00B3E479 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -319,7 +352,7 @@
 			};
 			name = Debug;
 		};
-		99AF09BE1C7C7A330002444B /* Release */ = {
+		992C0FCE1C7DBEEF00B3E479 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -334,34 +367,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		99AF09951C7C7A320002444B /* Build configuration list for PBXProject "Sarcophagus" */ = {
+		992C0FA51C7DBEEF00B3E479 /* Build configuration list for PBXProject "Sarcophagus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				99AF09B71C7C7A330002444B /* Debug */,
-				99AF09B81C7C7A330002444B /* Release */,
+				992C0FC71C7DBEEF00B3E479 /* Debug */,
+				992C0FC81C7DBEEF00B3E479 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		99AF09B91C7C7A330002444B /* Build configuration list for PBXNativeTarget "Sarcophagus" */ = {
+		992C0FC91C7DBEEF00B3E479 /* Build configuration list for PBXNativeTarget "Sarcophagus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				99AF09BA1C7C7A330002444B /* Debug */,
-				99AF09BB1C7C7A330002444B /* Release */,
+				992C0FCA1C7DBEEF00B3E479 /* Debug */,
+				992C0FCB1C7DBEEF00B3E479 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		99AF09BC1C7C7A330002444B /* Build configuration list for PBXNativeTarget "SarcophagusTests" */ = {
+		992C0FCC1C7DBEEF00B3E479 /* Build configuration list for PBXNativeTarget "SarcophagusTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				99AF09BD1C7C7A330002444B /* Debug */,
-				99AF09BE1C7C7A330002444B /* Release */,
+				992C0FCD1C7DBEEF00B3E479 /* Debug */,
+				992C0FCE1C7DBEEF00B3E479 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 99AF09921C7C7A320002444B /* Project object */;
+	rootObject = 992C0FA21C7DBEEF00B3E479 /* Project object */;
 }

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "99AF09991C7C7A320002444B"
+               BlueprintIdentifier = "992C0FA91C7DBEEF00B3E479"
                BuildableName = "Sarcophagus.app"
                BlueprintName = "Sarcophagus"
                ReferencedContainer = "container:Sarcophagus.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "99AF09AF1C7C7A330002444B"
+               BlueprintIdentifier = "992C0FBF1C7DBEEF00B3E479"
                BuildableName = "SarcophagusTests.xctest"
                BlueprintName = "SarcophagusTests"
                ReferencedContainer = "container:Sarcophagus.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "99AF09991C7C7A320002444B"
+            BlueprintIdentifier = "992C0FA91C7DBEEF00B3E479"
             BuildableName = "Sarcophagus.app"
             BlueprintName = "Sarcophagus"
             ReferencedContainer = "container:Sarcophagus.xcodeproj">
@@ -65,7 +65,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "99AF09991C7C7A320002444B"
+            BlueprintIdentifier = "992C0FA91C7DBEEF00B3E479"
             BuildableName = "Sarcophagus.app"
             BlueprintName = "Sarcophagus"
             ReferencedContainer = "container:Sarcophagus.xcodeproj">
@@ -84,7 +84,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "99AF09991C7C7A320002444B"
+            BlueprintIdentifier = "992C0FA91C7DBEEF00B3E479"
             BuildableName = "Sarcophagus.app"
             BlueprintName = "Sarcophagus"
             ReferencedContainer = "container:Sarcophagus.xcodeproj">
