@@ -63,7 +63,7 @@ class GameViewController: UIViewController {
         let ColorRed = colorPanelScene.childNodeWithName("ColorRed") as! SKSpriteNode
         let ColorBrown = colorPanelScene.childNodeWithName("ColorBrown")as! SKSpriteNode
         let ColorDarkBrown = colorPanelScene.childNodeWithName("ColorDarkBrown")as! SKSpriteNode
-
+        
         
         let white = UIColor(red:1, green:0.95, blue:0.71, alpha:1)
         let brown = UIColor(red:0.49, green:0.26, blue:0.17, alpha:1)
@@ -184,7 +184,7 @@ class GameViewController: UIViewController {
         
         //front walls
         scene.rootNode.addChildNode(wallNode)
-
+        
         // retrieve the SCNView
         let scnView = self.view as! SCNView
         
@@ -231,7 +231,7 @@ class GameViewController: UIViewController {
         let numberOfTouches = gestureRecognize.numberOfTouches()
         
         let translation = gestureRecognize.translationInView(gestureRecognize.view!)
-
+        
         
         if (numberOfTouches==fingersNeededToPan) {
             
@@ -259,13 +259,16 @@ class GameViewController: UIViewController {
             self.cameraOrbit.eulerAngles.x = Float(-M_PI) * heightRatio
             lastFingersNumber = fingersNeededToPan
             
-        } else if numberOfTouches == (fingersNeededToPan+1) && translateEnabled {
+            //TRANSLATION pan
+        } else if numberOfTouches == (fingersNeededToPan+1) {
             
-            xPos = (lastXPos + Float(-translation.x))/(panAttenuation)
-            yPos = (lastYPos + Float(translation.y))/(panAttenuation)
-            
-            self.cameraNode.position.x = xPos
-            self.cameraNode.position.y = yPos
+            if translateEnabled {
+                xPos = (lastXPos + Float(-translation.x))/(panAttenuation)
+                yPos = (lastYPos + Float(translation.y))/(panAttenuation)
+                
+                self.cameraNode.position.x = xPos
+                self.cameraNode.position.y = yPos
+            }
             
             lastFingersNumber = fingersNeededToPan+1
             
@@ -288,7 +291,7 @@ class GameViewController: UIViewController {
                 lastHeightRatio = heightRatio
                 //print("lastHeight: \(round(lastHeightRatio*100))")
                 //print("lastWidth: \(round(lastWidthRatio*100))")
-
+                
             }
             
             if lastFingersNumber==(fingersNeededToPan+1) {
