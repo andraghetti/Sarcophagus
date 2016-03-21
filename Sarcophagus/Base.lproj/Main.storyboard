@@ -28,23 +28,5 @@
                 <tapGestureRecognizer id="mC5-1A-XVM"/>
             </objects>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="Wlg-gd-rEo">
-            <objects>
-                <viewController id="XB0-49-50K" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="j4U-w5-F0O"/>
-                        <viewControllerLayoutGuide type="bottom" id="ZHr-n1-iIf"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="XP8-dc-Os8">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6YK-oC-kIm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1171" y="295"/>
-        </scene>
     </scenes>
 </document>

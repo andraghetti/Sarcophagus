@@ -9,6 +9,7 @@
 import UIKit
 import QuartzCore
 import SceneKit
+import SpriteKit
 
 class GameViewController: UIViewController {
     
@@ -18,16 +19,26 @@ class GameViewController: UIViewController {
     
     let floorNode = SCNNode()
     var wallNode = SCNNode()
+    var lateralWallRight = SCNNode()
+    var lateralWallLeft = SCNNode()
+    
     
     //var spotLightNode = SCNNode()
     
     
     //HANDLE PAN CAMERA
+    var initialPositionCamera = SCNVector3(x: -25, y: 70, z: 1450)
+    var translateEnabled = false
+    var lastXPos:Float = 0.0
+    var lastYPos:Float = 0.0
+    var xPos:Float = 0.0
+    var yPos:Float = 0.0
     var lastWidthRatio: Float = 0
     var lastHeightRatio: Float = 0.1
     var widthRatio: Float = 0
     var heightRatio: Float = 0.1
     var fingersNeededToPan = 1 //change this from GUI
+    var panAttenuation: Float = 10 //5.0: very fast ---- 40.0 very slow
     let maxWidthRatioRight: Float = 0.2
     let maxWidthRatioLeft: Float = -0.2
     let maxHeightRatioXDown: Float = 0.065
@@ -39,13 +50,59 @@ class GameViewController: UIViewController {
     let maxPinch = 146.0
     let minPinch = 40.0
     
+    //OVERLAY
+    var colorPanelScene = SKScene()
+    var pickedColor: UIColor = UIColor.whiteColor()
+    var NodesToColors = [SKSpriteNode: UIColor]()
+    var didPickColor = false
+    var OverlayBackground: SKSpriteNode = SKSpriteNode()
+    
+    func setColors() {
+        //Color Setup
+        let ColorWhite = colorPanelScene.childNodeWithName("ColorWhite") as! SKSpriteNode
+        let ColorRed = colorPanelScene.childNodeWithName("ColorRed") as! SKSpriteNode
+        let ColorBrown = colorPanelScene.childNodeWithName("ColorBrown")as! SKSpriteNode
+        let ColorDarkBrown = colorPanelScene.childNodeWithName("ColorDarkBrown")as! SKSpriteNode
+
+        
+        let white = UIColor(red:1, green:0.95, blue:0.71, alpha:1)
+        let brown = UIColor(red:0.49, green:0.26, blue:0.17, alpha:1)
+        let red = UIColor(red:0.67, green:0.32, blue:0.21, alpha:1)
+        let darkBrown = UIColor(red:0.27, green:0.25, blue:0.21, alpha:1)
+        
+        NodesToColors = [
+            ColorWhite: white,
+            ColorRed: red,
+            ColorBrown: brown,
+            ColorDarkBrown: darkBrown
+        ]
+        
+        OverlayBackground = colorPanelScene.childNodeWithName("OverlayBackground")as! SKSpriteNode
+    }
+    
+    func blur(image image: UIImage) -> UIImage {
+        let radius: CGFloat = 20;
+        let context = CIContext(options: nil);
+        let inputImage = CIImage(CGImage: image.CGImage!);
+        let filter = CIFilter(name: "CIGaussianBlur");
+        filter?.setValue(inputImage, forKey: kCIInputImageKey);
+        filter?.setValue("\(radius)", forKey:kCIInputRadiusKey);
+        let result = filter?.valueForKey(kCIOutputImageKey) as! CIImage;
+        let rect = CGRectMake(radius * 2, radius * 2, image.size.width - radius * 4, image.size.height - radius * 4)
+        let cgImage = context.createCGImage(result, fromRect: rect);
+        let returnImage = UIImage(CGImage: cgImage);
+        
+        return returnImage;
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // create a new scene
-        let scene = SCNScene(named: "art.scnassets/sarcophagus.scn")!
+        let scene = SCNScene(named: "art.scnassets/Sarcofago.dae")! //sarcofago.dae
         
-        // create and add a light to the scene
+        // MARK: Lights
+        //create and add a light to the scene
         let lightNode = SCNNode()
         lightNode.light = SCNLight()
         lightNode.light!.type = SCNLightTypeOmni
@@ -59,12 +116,13 @@ class GameViewController: UIViewController {
         ambientLightNode.light!.color = UIColor.darkGrayColor()
         scene.rootNode.addChildNode(ambientLightNode)
         
+        //MARK: Camera
         camera.usesOrthographicProjection = true
         camera.orthographicScale = 100
-        camera.zNear = 1
-        camera.zFar = 4000
+        camera.zNear = 10
+        camera.zFar = 3000
         
-        cameraNode.position = SCNVector3(x: 0, y: 50, z: 1450)
+        cameraNode.position = initialPositionCamera
         cameraNode.camera = camera
         cameraOrbit = SCNNode()
         cameraOrbit.addChildNode(cameraNode)
@@ -73,54 +131,60 @@ class GameViewController: UIViewController {
         //initial camera setup
         self.cameraOrbit.eulerAngles.y = Float(-2 * M_PI) * lastWidthRatio
         self.cameraOrbit.eulerAngles.x = Float(-M_PI) * lastHeightRatio
+        lastXPos = self.cameraNode.position.x
+        lastYPos = self.cameraNode.position.y
         
-        //FLOOR
+        //MARK: Floor
         let floor = SCNFloor()
-        floor.reflectionFalloffEnd = 0;
-        floor.reflectivity = 0;
+        floor.reflectionFalloffEnd = 0
+        floor.reflectivity = 0
         
-        floorNode.geometry = floor;
-        floorNode.geometry!.firstMaterial!.diffuse.contents = "art.scnassets/floor.png";
+        floorNode.geometry = floor
+        floorNode.name = "Floor"
+        floorNode.geometry!.firstMaterial!.diffuse.contents = "art.scnassets/floor.png"
         floorNode.geometry!.firstMaterial!.locksAmbientWithDiffuse = true
         floorNode.geometry!.firstMaterial!.diffuse.wrapS = SCNWrapMode.Repeat
         floorNode.geometry!.firstMaterial!.diffuse.wrapT = SCNWrapMode.Repeat
         floorNode.geometry!.firstMaterial!.diffuse.mipFilter =  SCNFilterMode.Nearest
-        floorNode.geometry!.firstMaterial!.doubleSided = false;
+        floorNode.geometry!.firstMaterial!.doubleSided = false
+        floorNode.castsShadow = true
         
         scene.rootNode.addChildNode(floorNode)
         
-        //WALL
+        //MARK: Walls
         // create the wall geometry
         let wallGeometry = SCNPlane.init(width: 500.0, height: 300.0)
-        wallGeometry.firstMaterial!.diffuse.contents = "art.scnassets/background.jpg";
-        floorNode.geometry!.firstMaterial!.diffuse.mipFilter =  SCNFilterMode.Nearest
-        wallGeometry.firstMaterial!.diffuse.wrapS = SCNWrapMode.Repeat;
-        wallGeometry.firstMaterial!.diffuse.wrapT = SCNWrapMode.Repeat;
-        wallGeometry.firstMaterial!.doubleSided = false;
-        wallGeometry.firstMaterial!.locksAmbientWithDiffuse = true;
+        wallGeometry.firstMaterial!.diffuse.contents = "art.scnassets/background.jpg"
+        wallGeometry.firstMaterial!.diffuse.mipFilter =  SCNFilterMode.Nearest
+        wallGeometry.firstMaterial!.diffuse.wrapS = SCNWrapMode.Repeat
+        wallGeometry.firstMaterial!.diffuse.wrapT = SCNWrapMode.Repeat
+        wallGeometry.firstMaterial!.doubleSided = false
+        wallGeometry.firstMaterial!.locksAmbientWithDiffuse = true
         
         wallNode = SCNNode.init(geometry: wallGeometry)
-        wallNode.position = SCNVector3Make(0, 120, -300); //this moves all 3 walls
-        wallNode.castsShadow = false
+        wallNode.name = "FrontWall"
+        wallNode.position = SCNVector3Make(0, 120, -300) //this moves all 3 walls
+        wallNode.castsShadow = true
         
         //  RIGHT LATERAL WALL
-        let lateralWallRight = SCNNode.init(geometry: wallGeometry)
+        lateralWallRight = SCNNode.init(geometry: wallGeometry)
+        lateralWallRight.name = "lateralWallRight"
         lateralWallRight.position = SCNVector3Make(-300, -20, 150);
         lateralWallRight.rotation = SCNVector4(x: 0, y: 1, z: 0, w: Float(M_PI/3))
-        lateralWallRight.castsShadow = false
+        lateralWallRight.castsShadow = true
         wallNode.addChildNode(lateralWallRight)
         
         // LEFT LATERAL WALL
-        let lateralWallLeft = SCNNode.init(geometry: wallGeometry)
+        lateralWallLeft = SCNNode.init(geometry: wallGeometry)
+        lateralWallLeft.name = "lateralWallLeft"
         lateralWallLeft.position = SCNVector3Make(300, -20, 150);
         lateralWallLeft.rotation = SCNVector4(x: 0, y: -1, z: 0, w: Float(M_PI/3))
-        lateralWallLeft.castsShadow = false
+        lateralWallLeft.castsShadow = true
         wallNode.addChildNode(lateralWallLeft)
         
         //front walls
         scene.rootNode.addChildNode(wallNode)
 
-        
         // retrieve the SCNView
         let scnView = self.view as! SCNView
         
@@ -133,6 +197,9 @@ class GameViewController: UIViewController {
         // configure the view
         scnView.backgroundColor = UIColor.grayColor()
         
+        
+        //MARK: Gesture Recognizer in SceneView
+        
         // add a pan gesture recognizer
         let panGesture = UIPanGestureRecognizer(target: self, action: "handlePan:")
         scnView.addGestureRecognizer(panGesture)
@@ -144,6 +211,19 @@ class GameViewController: UIViewController {
         // add a pinch gesture recognizer
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: "handlePinch:")
         scnView.addGestureRecognizer(pinchGesture)
+        
+        //MARK: OverLay
+        
+        colorPanelScene = SKScene(fileNamed: "art.scnassets/ColorPanelScene")!
+        scnView.overlaySKScene = colorPanelScene
+        scnView.overlaySKScene!.userInteractionEnabled = true;
+        
+        didPickColor = false
+        
+        setColors()
+        
+        //let OverlayBackground = colorPanelScene.childNodeWithName("OverlayBackground")as! SKSpriteNode
+        
     }
     
     func handlePan(gestureRecognize: UIPanGestureRecognizer) {
@@ -151,7 +231,7 @@ class GameViewController: UIViewController {
         let numberOfTouches = gestureRecognize.numberOfTouches()
         
         let translation = gestureRecognize.translationInView(gestureRecognize.view!)
-        
+
         
         if (numberOfTouches==fingersNeededToPan) {
             
@@ -177,23 +257,48 @@ class GameViewController: UIViewController {
             
             self.cameraOrbit.eulerAngles.y = Float(-2 * M_PI) * widthRatio
             self.cameraOrbit.eulerAngles.x = Float(-M_PI) * heightRatio
-            
-//            print("Height: \(round(heightRatio*100))")
-//            print("Width: \(round(widthRatio*100))")
-            
-            
-            //for final check on fingers number
             lastFingersNumber = fingersNeededToPan
+            
+        } else if numberOfTouches == (fingersNeededToPan+1) && translateEnabled {
+            
+            xPos = (lastXPos + Float(-translation.x))/(panAttenuation)
+            yPos = (lastYPos + Float(translation.y))/(panAttenuation)
+            
+            self.cameraNode.position.x = xPos
+            self.cameraNode.position.y = yPos
+            
+            lastFingersNumber = fingersNeededToPan+1
+            
         }
         
-        //lastFingersNumber = (numberOfTouches>0 ? numberOfTouches : lastFingersNumber)
-        
-        if (gestureRecognize.state == .Ended/* && lastFingersNumber==fingersNeededToPan*/) {
+        if (lastFingersNumber == fingersNeededToPan && numberOfTouches != fingersNeededToPan) {
             lastWidthRatio = widthRatio
             lastHeightRatio = heightRatio
-            //print("Pan with \(lastFingersNumber) finger\(lastFingersNumber>1 ? "s" : "")")
-            print("lastHeight: \(round(lastHeightRatio*100))")
-            print("lastWidth: \(round(lastWidthRatio*100))")
+            
+        }
+        
+        if lastFingersNumber != (fingersNeededToPan+1) && numberOfTouches != (fingersNeededToPan+1) {
+            lastXPos = xPos
+            lastYPos = yPos
+        }
+        
+        if (gestureRecognize.state == .Ended) {
+            if (lastFingersNumber==fingersNeededToPan) {
+                lastWidthRatio = widthRatio
+                lastHeightRatio = heightRatio
+                //print("lastHeight: \(round(lastHeightRatio*100))")
+                //print("lastWidth: \(round(lastWidthRatio*100))")
+
+            }
+            
+            if lastFingersNumber==(fingersNeededToPan+1) {
+                lastXPos = xPos
+                lastYPos = yPos
+                print("lastX: \(xPos)")
+                print("lastY: \(yPos)")
+            }
+            
+            print("Pan with \(lastFingersNumber) finger\(lastFingersNumber>1 ? "s" : "")")
         }
     }
     
@@ -212,54 +317,71 @@ class GameViewController: UIViewController {
         }
         
         if (gestureRecognize.state == .Ended) {
-            print("\nPinch: \(camera.orthographicScale)\n")
+            print("\nPinch: \(round(camera.orthographicScale))\n")
         }
         
     }
     
     func handleTap(gestureRecognize: UIGestureRecognizer) {
+        print("---------------TAP-----------------")
         // retrieve the SCNView
         let scnView = self.view as! SCNView
         
-        let p = gestureRecognize.locationInView(scnView)
-        let hitResults = scnView.hitTest(p, options: nil)
+        let touchedPointInScene = gestureRecognize.locationInView(scnView)
+        let hitResults = scnView.hitTest(touchedPointInScene, options: nil)
         
-        // check that we clicked on at least one object
-        if hitResults.count > 0 {
-            // retrieved the first clicked object
-            let result: AnyObject! = hitResults[0]
+        let OverlayView = colorPanelScene.view! as SKView
+        let touchedPointInOverlay = gestureRecognize.locationInView(OverlayView)
+        
+        
+        // if button color are touched
+        if OverlayBackground.containsPoint(touchedPointInOverlay) {
+            print("OVERLAY: tap in \(touchedPointInOverlay)")
             
-            //Exclude floor and wall from color
-            if result.node! != floorNode && result.node! != wallNode {
-                // get its material
-                let material = result.node!.geometry!.firstMaterial!
+            for (node, color) in NodesToColors {
+                // Check if the location of the touch is within the button's bounds
+                if node.containsPoint(touchedPointInOverlay) {
+                    print("\(node.name!) -> color picked \(color.description)")
+                    pickedColor = color
+                    didPickColor = true
+                }
+            }
+        } else {//if sarcophagus is touched
+            
+            // check that we clicked on at least one object
+            if hitResults.count > 0 && didPickColor {
+                // retrieved the first clicked object
+                let result: AnyObject! = hitResults[0]
                 
-                // begin coloration
-                SCNTransaction.begin()
-                SCNTransaction.setAnimationDuration(0.5)
+                print("OBJECT tap: \(result.node.name!)")
                 
-                let pickedColor = UIColor.greenColor()
-                
-                // on completion - keep color
-                SCNTransaction.setCompletionBlock {
+                //Exclude floor and wall from color
+                if result.node! != floorNode && result.node! != wallNode && result.node! != lateralWallRight && result.node! != lateralWallLeft {
+                    // get its material
+                    let material = result.node!.geometry!.firstMaterial!
+                    print("material: \(material.name!)")
+                    
+                    // begin coloration
                     SCNTransaction.begin()
                     SCNTransaction.setAnimationDuration(0.5)
                     
-                    material.diffuse.contents = pickedColor
+                    // on completion - keep color
+                    SCNTransaction.setCompletionBlock {
+                        SCNTransaction.begin()
+                        SCNTransaction.setAnimationDuration(0.3)
+                        
+                        material.diffuse.contents = self.pickedColor
+                        
+                        SCNTransaction.commit()
+                    }
                     
                     SCNTransaction.commit()
+                    
+                    material.diffuse.contents = pickedColor
                 }
-                
-                material.diffuse.contents = pickedColor
-                
-                SCNTransaction.commit()
             }
         }
-    }
-
-    
-    override func shouldAutorotate() -> Bool {
-        return true
+        print("-----------------------------------\n")
     }
     
     override func prefersStatusBarHidden() -> Bool {
