@@ -12,9 +12,13 @@
 		992C0FB21C7DBEEF00B3E479 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992C0FB11C7DBEEF00B3E479 /* GameViewController.swift */; };
 		992C0FB51C7DBEEF00B3E479 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 992C0FB31C7DBEEF00B3E479 /* Main.storyboard */; };
 		992C0FC51C7DBEEF00B3E479 /* SarcophagusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992C0FC41C7DBEEF00B3E479 /* SarcophagusTests.swift */; };
+		992FDE051CB51BB800FB16E0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FDE041CB51BB800FB16E0 /* Color.swift */; };
+		992FDE091CB5261400FB16E0 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FDE081CB5261400FB16E0 /* Button.swift */; };
+		992FDE0B1CB56D8600FB16E0 /* ColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992FDE0A1CB56D8600FB16E0 /* ColorButton.swift */; };
 		994E826A1C947EE800BF8DB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 994E82691C947EE800BF8DB4 /* Assets.xcassets */; };
 		994E826C1C955A9700BF8DB4 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994E826B1C955A9700BF8DB4 /* SpriteKit.framework */; };
 		994E826E1C955A9F00BF8DB4 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994E826D1C955A9F00BF8DB4 /* SceneKit.framework */; };
+		99BF18901CB3BEDC00CDDF46 /* ColorPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99BF188F1CB3BEDC00CDDF46 /* ColorPanelViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -49,9 +53,13 @@
 		992C0FC01C7DBEEF00B3E479 /* SarcophagusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SarcophagusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		992C0FC41C7DBEEF00B3E479 /* SarcophagusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SarcophagusTests.swift; sourceTree = "<group>"; };
 		992C0FC61C7DBEEF00B3E479 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		992FDE041CB51BB800FB16E0 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		992FDE081CB5261400FB16E0 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		992FDE0A1CB56D8600FB16E0 /* ColorButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorButton.swift; sourceTree = "<group>"; };
 		994E82691C947EE800BF8DB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		994E826B1C955A9700BF8DB4 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		994E826D1C955A9F00BF8DB4 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
+		99BF188F1CB3BEDC00CDDF46 /* ColorPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPanelViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +111,10 @@
 				994E82691C947EE800BF8DB4 /* Assets.xcassets */,
 				992C0FB31C7DBEEF00B3E479 /* Main.storyboard */,
 				992C0FBB1C7DBEEF00B3E479 /* Info.plist */,
+				992FDE041CB51BB800FB16E0 /* Color.swift */,
+				992FDE081CB5261400FB16E0 /* Button.swift */,
+				992FDE0A1CB56D8600FB16E0 /* ColorButton.swift */,
+				99BF188F1CB3BEDC00CDDF46 /* ColorPanelViewController.swift */,
 			);
 			path = Sarcophagus;
 			sourceTree = "<group>";
@@ -220,6 +232,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99BF18901CB3BEDC00CDDF46 /* ColorPanelViewController.swift in Sources */,
+				992FDE091CB5261400FB16E0 /* Button.swift in Sources */,
+				992FDE051CB51BB800FB16E0 /* Color.swift in Sources */,
+				992FDE0B1CB56D8600FB16E0 /* ColorButton.swift in Sources */,
 				992C0FB21C7DBEEF00B3E479 /* GameViewController.swift in Sources */,
 				992C0FAE1C7DBEEF00B3E479 /* AppDelegate.swift in Sources */,
 			);
@@ -341,10 +357,14 @@
 		992C0FCA1C7DBEEF00B3E479 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Sarcophagus/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Lorenzo-Andraghetti.Sarcophagus";
+				PRODUCT_BUNDLE_IDENTIFIER = LorenzoAndraghetti.Sarcophagus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -352,10 +372,14 @@
 		992C0FCB1C7DBEEF00B3E479 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Sarcophagus/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Lorenzo-Andraghetti.Sarcophagus";
+				PRODUCT_BUNDLE_IDENTIFIER = LorenzoAndraghetti.Sarcophagus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

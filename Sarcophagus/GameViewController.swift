@@ -13,6 +13,30 @@ import SpriteKit
 
 class GameViewController: UIViewController {
     
+    var screenOrientation: UIInterfaceOrientation {
+        get {
+            return UIApplication.sharedApplication().statusBarOrientation
+        }
+    }
+    var screenWidth: CGFloat {
+        get {
+            if UIInterfaceOrientationIsPortrait(screenOrientation) {
+                return UIScreen.mainScreen().bounds.size.width
+            } else {
+                return UIScreen.mainScreen().bounds.size.height
+            }
+        }
+    }
+    var screenHeight: CGFloat {
+        get {
+            if UIInterfaceOrientationIsPortrait(screenOrientation) {
+                return UIScreen.mainScreen().bounds.size.height
+            } else {
+                return UIScreen.mainScreen().bounds.size.width
+            }
+        }
+    }
+    
     var cameraOrbit = SCNNode()
     let cameraNode = SCNNode()
     let camera = SCNCamera()
@@ -23,7 +47,7 @@ class GameViewController: UIViewController {
     var lateralWallLeft = SCNNode()
     
     
-    //var spotLightNode = SCNNode()
+    var spotLightNode = SCNNode()
     
     
     //HANDLE PAN CAMERA
@@ -128,6 +152,19 @@ class GameViewController: UIViewController {
         cameraOrbit.addChildNode(cameraNode)
         scene.rootNode.addChildNode(cameraOrbit)
         
+        
+        // cercare su documentazione apple.  deve essere ristretto lo spot della luce.
+//        spotLightNode = SCNNode()
+//        spotLightNode.light = SCNLight()
+//        spotLightNode.light!.type = SCNLightTypeSpot
+//        spotLightNode.castsShadow=true
+//        let spotLight = spotLightNode.light!
+//        //spotLight.color = UIColor.greenColor()
+//        spotLight.zNear = 1500
+//        spotLight.spotInnerAngle = 10
+//        spotLightNode.position = cameraNode.position
+//        cameraOrbit.addChildNode(spotLightNode)
+        
         //initial camera setup
         self.cameraOrbit.eulerAngles.y = Float(-2 * M_PI) * lastWidthRatio
         self.cameraOrbit.eulerAngles.x = Float(-M_PI) * lastHeightRatio
@@ -201,15 +238,15 @@ class GameViewController: UIViewController {
         //MARK: Gesture Recognizer in SceneView
         
         // add a pan gesture recognizer
-        let panGesture = UIPanGestureRecognizer(target: self, action: "handlePan:")
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(GameViewController.handlePan(_:)))
         scnView.addGestureRecognizer(panGesture)
         
         // add a tap gesture recognizer
-        let tapGesture = UITapGestureRecognizer(target: self, action: "handleTap:")
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(GameViewController.handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
         
         // add a pinch gesture recognizer
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: "handlePinch:")
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(GameViewController.handlePinch(_:)))
         scnView.addGestureRecognizer(pinchGesture)
         
         //MARK: OverLay
