@@ -13,30 +13,6 @@ import SpriteKit
 
 class GameViewController: UIViewController {
     
-    var screenOrientation: UIInterfaceOrientation {
-        get {
-            return UIApplication.sharedApplication().statusBarOrientation
-        }
-    }
-    var screenWidth: CGFloat {
-        get {
-            if UIInterfaceOrientationIsPortrait(screenOrientation) {
-                return UIScreen.mainScreen().bounds.size.width
-            } else {
-                return UIScreen.mainScreen().bounds.size.height
-            }
-        }
-    }
-    var screenHeight: CGFloat {
-        get {
-            if UIInterfaceOrientationIsPortrait(screenOrientation) {
-                return UIScreen.mainScreen().bounds.size.height
-            } else {
-                return UIScreen.mainScreen().bounds.size.width
-            }
-        }
-    }
-    
     var cameraOrbit = SCNNode()
     let cameraNode = SCNNode()
     let camera = SCNCamera()
@@ -62,7 +38,7 @@ class GameViewController: UIViewController {
     var widthRatio: Float = 0
     var heightRatio: Float = 0.1
     var fingersNeededToPan = 1 //change this from GUI
-    var panAttenuation: Float = 10 //5.0: very fast ---- 40.0 very slow
+    var panAttenuation: Float = 400 //100: very fast ---- 1000 very slow
     let maxWidthRatioRight: Float = 0.2
     let maxWidthRatioLeft: Float = -0.2
     let maxHeightRatioXDown: Float = 0.065
@@ -299,15 +275,12 @@ class GameViewController: UIViewController {
             //TRANSLATION pan
         } else if numberOfTouches == (fingersNeededToPan+1) {
             
-            if translateEnabled {
-                xPos = (lastXPos + Float(-translation.x))/(panAttenuation)
-                yPos = (lastYPos + Float(translation.y))/(panAttenuation)
-                
-                self.cameraNode.position.x = xPos
-                self.cameraNode.position.y = yPos
-            }
+            let velocity = gestureRecognize.velocityInView(gestureRecognize.view!)
             
-            lastFingersNumber = fingersNeededToPan+1
+            //print("translation: \(-velocity) y: \(velocity) ")
+            
+            self.cameraOrbit.position.x += Float(-velocity.x)/panAttenuation
+            self.cameraOrbit.position.y += Float(velocity.y)/panAttenuation
             
         }
         
@@ -317,11 +290,6 @@ class GameViewController: UIViewController {
             
         }
         
-        if lastFingersNumber != (fingersNeededToPan+1) && numberOfTouches != (fingersNeededToPan+1) {
-            lastXPos = xPos
-            lastYPos = yPos
-        }
-        
         if (gestureRecognize.state == .Ended) {
             if (lastFingersNumber==fingersNeededToPan) {
                 lastWidthRatio = widthRatio
@@ -329,13 +297,6 @@ class GameViewController: UIViewController {
                 //print("lastHeight: \(round(lastHeightRatio*100))")
                 //print("lastWidth: \(round(lastWidthRatio*100))")
                 
-            }
-            
-            if lastFingersNumber==(fingersNeededToPan+1) {
-                lastXPos = xPos
-                lastYPos = yPos
-                print("lastX: \(xPos)")
-                print("lastY: \(yPos)")
             }
             
             print("Pan with \(lastFingersNumber) finger\(lastFingersNumber>1 ? "s" : "")")
