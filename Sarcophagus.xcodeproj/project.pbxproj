@@ -11,9 +11,23 @@
 		992C0FB01C7DBEEF00B3E479 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 992C0FAF1C7DBEEF00B3E479 /* art.scnassets */; };
 		992C0FB21C7DBEEF00B3E479 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992C0FB11C7DBEEF00B3E479 /* GameViewController.swift */; };
 		992C0FB51C7DBEEF00B3E479 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 992C0FB31C7DBEEF00B3E479 /* Main.storyboard */; };
-		992C0FB71C7DBEEF00B3E479 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 992C0FB61C7DBEEF00B3E479 /* Assets.xcassets */; };
 		992C0FC51C7DBEEF00B3E479 /* SarcophagusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992C0FC41C7DBEEF00B3E479 /* SarcophagusTests.swift */; };
+		994E826A1C947EE800BF8DB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 994E82691C947EE800BF8DB4 /* Assets.xcassets */; };
+		994E826C1C955A9700BF8DB4 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994E826B1C955A9700BF8DB4 /* SpriteKit.framework */; };
+		994E826E1C955A9F00BF8DB4 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 994E826D1C955A9F00BF8DB4 /* SceneKit.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		994E826F1C955AB800BF8DB4 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = folder.skatlas;
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# TextureAtlas\n";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		992C0FC11C7DBEEF00B3E479 /* PBXContainerItemProxy */ = {
@@ -31,11 +45,13 @@
 		992C0FAF1C7DBEEF00B3E479 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		992C0FB11C7DBEEF00B3E479 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		992C0FB41C7DBEEF00B3E479 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		992C0FB61C7DBEEF00B3E479 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		992C0FBB1C7DBEEF00B3E479 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		992C0FC01C7DBEEF00B3E479 /* SarcophagusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SarcophagusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		992C0FC41C7DBEEF00B3E479 /* SarcophagusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SarcophagusTests.swift; sourceTree = "<group>"; };
 		992C0FC61C7DBEEF00B3E479 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		994E82691C947EE800BF8DB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		994E826B1C955A9700BF8DB4 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		994E826D1C955A9F00BF8DB4 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				994E826E1C955A9F00BF8DB4 /* SceneKit.framework in Frameworks */,
+				994E826C1C955A9700BF8DB4 /* SpriteKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +77,8 @@
 		992C0FA11C7DBEEF00B3E479 = {
 			isa = PBXGroup;
 			children = (
+				994E826D1C955A9F00BF8DB4 /* SceneKit.framework */,
+				994E826B1C955A9700BF8DB4 /* SpriteKit.framework */,
 				992C0FAC1C7DBEEF00B3E479 /* Sarcophagus */,
 				992C0FC31C7DBEEF00B3E479 /* SarcophagusTests */,
 				992C0FAB1C7DBEEF00B3E479 /* Products */,
@@ -80,8 +100,8 @@
 				992C0FAD1C7DBEEF00B3E479 /* AppDelegate.swift */,
 				992C0FAF1C7DBEEF00B3E479 /* art.scnassets */,
 				992C0FB11C7DBEEF00B3E479 /* GameViewController.swift */,
+				994E82691C947EE800BF8DB4 /* Assets.xcassets */,
 				992C0FB31C7DBEEF00B3E479 /* Main.storyboard */,
-				992C0FB61C7DBEEF00B3E479 /* Assets.xcassets */,
 				992C0FBB1C7DBEEF00B3E479 /* Info.plist */,
 			);
 			path = Sarcophagus;
@@ -108,6 +128,7 @@
 				992C0FA81C7DBEEF00B3E479 /* Resources */,
 			);
 			buildRules = (
+				994E826F1C955AB800BF8DB4 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -180,7 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				992C0FB01C7DBEEF00B3E479 /* art.scnassets in Resources */,
-				992C0FB71C7DBEEF00B3E479 /* Assets.xcassets in Resources */,
+				994E826A1C947EE800BF8DB4 /* Assets.xcassets in Resources */,
 				992C0FB51C7DBEEF00B3E479 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,10 +341,14 @@
 		992C0FCA1C7DBEEF00B3E479 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Sarcophagus/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Lorenzo-Andraghetti.Sarcophagus";
+				PRODUCT_BUNDLE_IDENTIFIER = LorenzoAndraghetti.Sarcophagus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -331,10 +356,14 @@
 		992C0FCB1C7DBEEF00B3E479 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Sarcophagus/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Lorenzo-Andraghetti.Sarcophagus";
+				PRODUCT_BUNDLE_IDENTIFIER = LorenzoAndraghetti.Sarcophagus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
