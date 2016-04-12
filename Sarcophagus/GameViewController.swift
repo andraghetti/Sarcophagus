@@ -116,10 +116,10 @@ class GameViewController: UIViewController {
         
         
         
-        let white = UIColor(red:1, green:0.95, blue:0.71, alpha:1)
-        let brown = UIColor(red:0.49, green:0.26, blue:0.17, alpha:1)
-        let red = UIColor(red:0.67, green:0.32, blue:0.21, alpha:1)
-        let darkBrown = UIColor(red:0.27, green:0.25, blue:0.21, alpha:1)
+        let white = UIColor(red:1, green:0.95, blue:0.75, alpha:1)
+        let red = UIColor(red:1, green:0.50, blue:0.35, alpha:1)
+        let brown = UIColor(red:0.60, green:0.40, blue:0.30, alpha:1)
+        let darkBrown = UIColor(red:0.30, green:0.25, blue:0.12, alpha:1.00)
         
         NodesToColors = [
             ColorWhiteButton: white,
@@ -421,8 +421,6 @@ class GameViewController: UIViewController {
             }
             
             if (ResetCameraButton.containsPoint(touchedPointInOverlay)) {
-                
-                self.ResetCameraButton.texture = self.FunctionAtlas.textureNamed("ResetCameraSelected")
                 
                 let moveTo = SCNAction.moveTo(initialPositionCamera, duration: 2);
                 moveTo.timingMode = SCNActionTimingMode.EaseInEaseOut;

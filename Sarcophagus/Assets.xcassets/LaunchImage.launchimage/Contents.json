@@ -3,7 +3,6 @@
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "ipad_portrait_7-8_@1x.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "1x"
@@ -19,7 +18,6 @@
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "ipad_portrait_7-8_@2x.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "2x"
@@ -35,14 +33,12 @@
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "ipad_portrait5-6 statusbar_@1x.png",
       "extent" : "to-status-bar",
       "scale" : "1x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "ipad_portrait_7-8_@1x-1.png",
       "extent" : "full-screen",
       "scale" : "1x"
     },
@@ -61,14 +57,12 @@
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "ipad_portrait5-6 statusbar_@2x.png",
       "extent" : "to-status-bar",
       "scale" : "2x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "ipad_portrait_7-8_@2x-1.png",
       "extent" : "full-screen",
       "scale" : "2x"
     },
