@@ -18,26 +18,21 @@ class GameViewController: UIViewController {
     let camera = SCNCamera()
     var spotLightNode = SCNNode()
     
-    let floorNode = SCNNode()
-    var wallNode = SCNNode()
-    var lateralWallRight = SCNNode()
-    var lateralWallRight2 = SCNNode()
-    var lateralWallLeft = SCNNode()
-    var lateralWallLeft2 = SCNNode()
+    var decorationNode = SCNNode()
+    var backgroundNode = SCNNode()
     
-    let sceneRatio:Float = 100.0 //try to mantain to 100. It's not set in all var
+    let sceneRatio:Float = 1 //try to mantain to 100. It's not set in all var
     
     var lastFingersNumber = 0
     
     //HANDLE PAN CAMERA
-    var initialPositionCamera = SCNVector3(x: -0.25, y: 0.7, z: 16)
-    var translateEnabled = false
-    let maxPanY:Float = 160.0
+    var initialPositionCamera = SCNVector3(x: -0.25, y: 0.7, z: 5)
+    let maxPanY:Float = 1.6
     let minPanY:Float = 0.0
-    let maxPanX:Float = 160.0
-    let minPanX:Float = -160.0
+    let maxPanX:Float = 1.6
+    let minPanX:Float = -1.6
     var fingersToPan = 1 //change this from GUI
-    var panAttenuation: Float = 300 //100: very fast ---- 1000 very slow
+    var panAttenuation: Float = 38000 //100: very fast ---- 1000 very slow
     
     let initialWidthRatio: Float = 0
     let initialHeightRatio: Float = 0.1
@@ -52,12 +47,12 @@ class GameViewController: UIViewController {
     let maxHeightRatioXUp: Float = 0.4
     
     //HANDLE PINCH CAMERA
-    var pinchAttenuation = 1.0  //1.0: very fast ---- 100.0 very slow
-    let initialPinchScale: Double = 110
+    var pinchAttenuation = 100.0  //10.0: very fast ---- 1000.0 very slow
+    let initialPinchScale: Double = 1.1
     let minPinchVelocity = -15.0
     let maxPinchVelocity = 15.0
-    let maxPinch = 146.0
-    let minPinch = 40.0
+    let maxPinch = 1.4
+    let minPinch = 0.4
     
     //OVERLAY
     var colorPanelScene = SKScene()
@@ -85,18 +80,18 @@ class GameViewController: UIViewController {
     var screenWidth: CGFloat {
         get {
             if UIInterfaceOrientationIsPortrait(screenOrientation) {
-                return UIScreen.mainScreen().bounds.size.width
+                return UIScreen.mainScreen().bounds.size.width * UIScreen.mainScreen().scale
             } else {
-                return UIScreen.mainScreen().bounds.size.height
+                return UIScreen.mainScreen().bounds.size.height * UIScreen.mainScreen().scale
             }
         }
     }
     var screenHeight: CGFloat {
         get {
             if UIInterfaceOrientationIsPortrait(screenOrientation) {
-                return UIScreen.mainScreen().bounds.size.height
+                return UIScreen.mainScreen().bounds.size.height * UIScreen.mainScreen().scale
             } else {
-                return UIScreen.mainScreen().bounds.size.width
+                return UIScreen.mainScreen().bounds.size.width * UIScreen.mainScreen().scale
             }
         }
     }
@@ -116,10 +111,10 @@ class GameViewController: UIViewController {
         
         
         
-        let white = UIColor(red:1, green:0.95, blue:0.75, alpha:1)
-        let red = UIColor(red:1, green:0.50, blue:0.35, alpha:1)
-        let brown = UIColor(red:0.60, green:0.40, blue:0.30, alpha:1)
-        let darkBrown = UIColor(red:0.30, green:0.25, blue:0.12, alpha:1.00)
+        let white = UIColor(red:0.96, green:0.93, blue:0.71, alpha:1.00)
+        let red = UIColor(red:0.64, green:0.29, blue:0.18, alpha:1.00)
+        let brown = UIColor(red:0.45, green:0.28, blue:0.22, alpha:1.00)
+        let darkBrown = UIColor(red:0.34, green:0.26, blue:0.23, alpha:1.00)
         
         NodesToColors = [
             ColorWhiteButton: white,
@@ -147,13 +142,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         // create a new scene
-        let scene = SCNScene(named: "art.scnassets/Sarcofago.dae")!
-        
-        //Re-scale for new object
-        for node in scene.rootNode.childNodes {
-            node.scale = SCNVector3.init(sceneRatio*1.2, sceneRatio*1.2, sceneRatio*1.2)
-        }
-        
+        let scene = SCNScene(named: "art.scnassets/sarcofago.dae")!
         
         // MARK: Lights
         //create and add a light to the scene
@@ -171,6 +160,8 @@ class GameViewController: UIViewController {
         ambientLightNode.light!.color = UIColor.darkGrayColor()
         ambientLightNode.light?.castsShadow = true
         scene.rootNode.addChildNode(ambientLightNode)
+
+
         
         //MARK: Camera
         initialPositionCamera = SCNVector3(x: -0.35*sceneRatio, y: 0.7*sceneRatio, z: 10*sceneRatio)
@@ -190,69 +181,14 @@ class GameViewController: UIViewController {
         self.cameraOrbit.eulerAngles.x = Float(-M_PI) * initialHeightRatio
         self.cameraNode.camera?.orthographicScale = initialPinchScale
         
-        //MARK: Floor
-        let floor = SCNFloor()
-        floor.reflectionFalloffEnd = 0
-        floor.reflectivity = 0
-        
-        floorNode.geometry = floor
-        floorNode.name = "Floor"
-        floorNode.geometry!.firstMaterial!.diffuse.contents = "art.scnassets/floor.png"
-        floorNode.geometry!.firstMaterial!.locksAmbientWithDiffuse = true
-        floorNode.geometry!.firstMaterial!.diffuse.wrapS = SCNWrapMode.Repeat
-        floorNode.geometry!.firstMaterial!.diffuse.wrapT = SCNWrapMode.Repeat
-        floorNode.geometry!.firstMaterial!.diffuse.mipFilter =  SCNFilterMode.Nearest
-        floorNode.geometry!.firstMaterial!.doubleSided = false
-        floorNode.castsShadow = true
-        
-        scene.rootNode.addChildNode(floorNode)
-        
-        //MARK: Walls
-        // create the wall geometry
-        let wallGeometry = SCNPlane.init(width: 5*CGFloat(sceneRatio), height: 3*CGFloat(sceneRatio))
-        wallGeometry.firstMaterial!.diffuse.contents = "art.scnassets/background.jpg"
-        wallGeometry.firstMaterial!.diffuse.mipFilter =  SCNFilterMode.Nearest
-        wallGeometry.firstMaterial!.diffuse.wrapS = SCNWrapMode.Repeat
-        wallGeometry.firstMaterial!.diffuse.wrapT = SCNWrapMode.Repeat
-        wallGeometry.firstMaterial!.doubleSided = false
-        wallGeometry.firstMaterial!.locksAmbientWithDiffuse = true
-        
-        wallNode = SCNNode.init(geometry: wallGeometry)
-        wallNode.name = "FrontWall"
-        wallNode.position = SCNVector3Make(1, (1.2)*sceneRatio, (-3.0)*sceneRatio) //this moves all 5 walls
-        
-        //  RIGHT LATERAL WALL
-        lateralWallRight = SCNNode.init(geometry: wallGeometry)
-        lateralWallRight.name = "lateralWallRight"
-        lateralWallRight.position = SCNVector3Make(-3.5*sceneRatio, -0.2*sceneRatio, 1.7*sceneRatio);
-        lateralWallRight.rotation = SCNVector4(x: 0, y: 1, z: 0, w: Float(M_PI/3))
-        wallNode.addChildNode(lateralWallRight)
-        lateralWallRight2 = SCNNode.init(geometry: wallGeometry)
-        lateralWallRight2.name = "lateralWallRight2"
-        lateralWallRight2.position = SCNVector3Make(-4.5*sceneRatio, -0.2*sceneRatio, 6*sceneRatio);
-        lateralWallRight2.rotation = SCNVector4(x: 0, y: 1, z: 0, w: Float(M_PI/2))
-        wallNode.addChildNode(lateralWallRight2)
-        
-        // LEFT LATERAL WALL
-        lateralWallLeft = SCNNode.init(geometry: wallGeometry)
-        lateralWallLeft.name = "lateralWallLeft"
-        lateralWallLeft.position = SCNVector3Make(3.5*sceneRatio, -0.2*sceneRatio, 1.7*sceneRatio);
-        lateralWallLeft.rotation = SCNVector4(x: 0, y: -1, z: 0, w: Float(M_PI/3))
-        wallNode.addChildNode(lateralWallLeft)
-        lateralWallLeft2 = SCNNode.init(geometry: wallGeometry)
-        lateralWallLeft2.name = "lateralWallLeft"
-        lateralWallLeft2.position = SCNVector3Make(4.5*sceneRatio, -0.2*sceneRatio, 6*sceneRatio);
-        lateralWallLeft2.rotation = SCNVector4(x: 0, y: -1, z: 0, w: Float(M_PI/2))
-        wallNode.addChildNode(lateralWallLeft2)
-        
-        //front walls
-        scene.rootNode.addChildNode(wallNode)
-        
         // retrieve the SCNView
         let scnView = self.view as! SCNView
         
         // set the scene to the view
         scnView.scene = scene
+        
+        decorationNode = scene.rootNode.childNodeWithName("decorazioni", recursively: true)!
+        backgroundNode = scene.rootNode.childNodeWithName("background", recursively: true)!
         
         //MARK: Gesture Recognizer in SceneView
         
@@ -287,12 +223,6 @@ class GameViewController: UIViewController {
         if(gestureRecognize.state == .Began) {
             lastFingersNumber = numberOfTouches
         }
-        
-        //        let scnView = self.view as! SCNView
-        //        let results = scnView.hitTest(gestureRecognize.locationInView(scnView), options: [SCNHitTestFirstFoundOnlyKey: true]) as [SCNHitTestResult]
-        //        for result in results {
-        //            printSpot(result)
-        //        }
         
         //ROTATION pan
         if (lastFingersNumber==fingersToPan) {
@@ -377,7 +307,8 @@ class GameViewController: UIViewController {
         }
         
         if (gestureRecognize.state == .Ended) {
-            print("\nPinch: \(round(camera.orthographicScale))\n")
+            print("\nPinch: \(round(camera.orthographicScale*100))\n")
+            
         }
         
     }
@@ -494,34 +425,30 @@ class GameViewController: UIViewController {
             // check that we clicked on at least one object
             if hitResults.count > 0 && didPickColor {
                 // retrieved the first clicked object
-                let result: SCNHitTestResult! = hitResults[0]
+                var result: SCNHitTestResult! = hitResults[0]
                 
-                print("OBJECT tap: \(result.node.name!)")
+                //Exclude background from color
+                if result.node != backgroundNode{
+                    let result2: SCNHitTestResult! = hitResults[1]
+                    
+                    print("OBJECT tap: \(result.node.name!)")
+                    print("OBJECT2 tap: \(result2.node.name!)")
+                    
+                    if result.node == decorationNode {
+                        result = result2
+                    }
                 
-                //Exclude floor and wall from color
-                if result.node != floorNode && result.node != wallNode && result.node != lateralWallRight && result.node != lateralWallLeft && result.node != lateralWallRight2 && result.node != lateralWallLeft2{
+                
                     // get its material
                     let material = result.node.geometry!.firstMaterial!
                     print("material: \(material.name!)")
                                         
-                    material.diffuse.contents = pickedColor
+                    material.multiply.contents = pickedColor
                 }
             }
         }
         print("-----------------------------------\n")
     }
-    
-    //    func printSpot(result: SCNHitTestResult) {
-    //
-    //        let sprite = SKSpriteNode(imageNamed: "white-spot.png")
-    //        sprite.color = self.pickedColor
-    //
-    //        let texcoord = result.textureCoordinatesWithMappingChannel(0)
-    //        sprite.position.x = texcoord.x * skScene.size.width
-    //        sprite.position.y = (1 - texcoord.y) * skScene.size.height
-    //
-    //        skScene.addChild(sprite)
-    //    }
     
     func refresh() {
         
