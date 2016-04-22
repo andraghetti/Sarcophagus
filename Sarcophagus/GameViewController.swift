@@ -160,8 +160,6 @@ class GameViewController: UIViewController {
         ambientLightNode.light!.color = UIColor.darkGrayColor()
         ambientLightNode.light?.castsShadow = true
         scene.rootNode.addChildNode(ambientLightNode)
-
-
         
         //MARK: Camera
         initialPositionCamera = SCNVector3(x: -0.35*sceneRatio, y: 0.7*sceneRatio, z: 10*sceneRatio)
@@ -353,41 +351,7 @@ class GameViewController: UIViewController {
             
             if (ResetCameraButton.containsPoint(touchedPointInOverlay)) {
                 
-                let moveTo = SCNAction.moveTo(initialPositionCamera, duration: 2);
-                moveTo.timingMode = SCNActionTimingMode.EaseInEaseOut;
-                cameraNode.runAction(moveTo)
-                
-                let initialAngleY = Float(-2 * M_PI) * self.initialWidthRatio
-                let initialAngleX = Float(-M_PI) * self.initialHeightRatio
-                let scale = self.cameraNode.camera?.orthographicScale
-                
-                
-                // begin coloration
-                SCNTransaction.begin()
-                SCNTransaction.setAnimationDuration(2)
-                
-                
-                // on completion - select
-                SCNTransaction.setCompletionBlock {
-                    SCNTransaction.begin()
-                    SCNTransaction.setAnimationDuration(2)
-                    
-                    self.cameraOrbit.eulerAngles.y = initialAngleY
-                    self.cameraOrbit.eulerAngles.x = initialAngleX
-                    self.cameraNode.camera?.orthographicScale = self.initialPinchScale
-                   
-                    SCNTransaction.commit()
-                    
-                }
-                SCNTransaction.commit()
-                
-                self.lastWidthRatio = self.initialWidthRatio
-                self.lastHeightRatio = self.initialHeightRatio
-                
-                print("Reset Camera Position: \(cameraNode.position), Scale: \(scale!)")
-                
-                
-                refresh()
+                moveAnimation()
                 
                 didPickFunction = true
                 
@@ -396,6 +360,19 @@ class GameViewController: UIViewController {
             if (ResetFigureButton.containsPoint(touchedPointInOverlay)) {
                 print("Reset Figure. TODO")
                 didPickFunction = true
+                
+                let nodes = scnView.scene!.rootNode.childNodesPassingTest { (child, stop) -> Bool in
+                    return (child.name != nil && child.geometry != nil && child.geometry!.firstMaterial!.multiply.contents != nil)
+                }
+                
+                
+                
+                for node in nodes {
+                    if (node != self.decorationNode && node != self.backgroundNode) {
+                        
+                        node.geometry!.firstMaterial!.multiply.contents = UIColor.whiteColor()
+                    }
+                }
                 
             }
             
@@ -437,12 +414,12 @@ class GameViewController: UIViewController {
                     if result.node == decorationNode {
                         result = result2
                     }
-                
-                
+                    
+                    
                     // get its material
                     let material = result.node.geometry!.firstMaterial!
                     print("material: \(material.name!)")
-                                        
+                    
                     material.multiply.contents = pickedColor
                 }
             }
@@ -458,6 +435,43 @@ class GameViewController: UIViewController {
         self.cameraNode.position.x = current
         
         
+    }
+    
+    func moveAnimation() {
+        let moveTo = SCNAction.moveTo(initialPositionCamera, duration: 2);
+        moveTo.timingMode = SCNActionTimingMode.EaseInEaseOut;
+        cameraNode.runAction(moveTo)
+        
+        let initialAngleY = Float(-2 * M_PI) * self.initialWidthRatio
+        let initialAngleX = Float(-M_PI) * self.initialHeightRatio
+        let scale = self.cameraNode.camera?.orthographicScale
+        
+        
+        // begin coloration
+        SCNTransaction.begin()
+        SCNTransaction.setAnimationDuration(2)
+        
+        
+        // on completion - select
+        SCNTransaction.setCompletionBlock {
+            SCNTransaction.begin()
+            SCNTransaction.setAnimationDuration(2)
+            
+            self.cameraOrbit.eulerAngles.y = initialAngleY
+            self.cameraOrbit.eulerAngles.x = initialAngleX
+            self.cameraNode.camera?.orthographicScale = self.initialPinchScale
+            
+            SCNTransaction.commit()
+            
+        }
+        SCNTransaction.commit()
+        
+        self.lastWidthRatio = self.initialWidthRatio
+        self.lastHeightRatio = self.initialHeightRatio
+        
+        print("Reset Camera Position: \(cameraNode.position), Scale: \(scale!)")
+        
+        refresh()
     }
     
     override func prefersStatusBarHidden() -> Bool {
