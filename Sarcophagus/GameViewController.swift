@@ -73,29 +73,29 @@ class GameViewController: UIViewController {
     var ColorAtlas: SKTextureAtlas = SKTextureAtlas()
     
     
-    var screenOrientation: UIInterfaceOrientation {
-        get {
-            return UIApplication.sharedApplication().statusBarOrientation
-        }
-    }
-    var screenWidth: CGFloat {
-        get {
-            if UIInterfaceOrientationIsPortrait(screenOrientation) {
-                return UIScreen.mainScreen().bounds.size.width * UIScreen.mainScreen().scale
-            } else {
-                return UIScreen.mainScreen().bounds.size.height * UIScreen.mainScreen().scale
-            }
-        }
-    }
-    var screenHeight: CGFloat {
-        get {
-            if UIInterfaceOrientationIsPortrait(screenOrientation) {
-                return UIScreen.mainScreen().bounds.size.height * UIScreen.mainScreen().scale
-            } else {
-                return UIScreen.mainScreen().bounds.size.width * UIScreen.mainScreen().scale
-            }
-        }
-    }
+    //    var screenOrientation: UIInterfaceOrientation {
+    //        get {
+    //            return UIApplication.sharedApplication().statusBarOrientation
+    //        }
+    //    }
+    //    var screenWidth: CGFloat {
+    //        get {
+    //            if UIInterfaceOrientationIsPortrait(screenOrientation) {
+    //                return UIScreen.mainScreen().bounds.size.width * UIScreen.mainScreen().scale
+    //            } else {
+    //                return UIScreen.mainScreen().bounds.size.height * UIScreen.mainScreen().scale
+    //            }
+    //        }
+    //    }
+    //    var screenHeight: CGFloat {
+    //        get {
+    //            if UIInterfaceOrientationIsPortrait(screenOrientation) {
+    //                return UIScreen.mainScreen().bounds.size.height * UIScreen.mainScreen().scale
+    //            } else {
+    //                return UIScreen.mainScreen().bounds.size.width * UIScreen.mainScreen().scale
+    //            }
+    //        }
+    //    }
     
     
     func setPanel() {
@@ -137,13 +137,14 @@ class GameViewController: UIViewController {
         
         ChangeModeButton.texture = fingersToRotate == 1 ? FunctionAtlas.textureNamed("RotateMode") : FunctionAtlas.textureNamed("PanMode")
         
+        refresh()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // create a new scene
-        let scene = SCNScene(named: "art.scnassets/sarcofago.dae")!
+        let scene = SCNScene(named: "art.scnassets/Sarcofago.dae")!
         
         // MARK: Lights
         //create and add a light to the scene
@@ -359,11 +360,14 @@ class GameViewController: UIViewController {
                     return (child.name != nil && child.geometry != nil && child.geometry!.firstMaterial!.multiply.contents != nil)
                 }
                 
-                
-                
                 for node in nodes {
-                    if (node != self.decorationNode && node != self.backgroundNode) {
-                        
+                    
+                    let isNotAnEye = node.name != "DettagliBianchiOcchiDonna" &&
+                        node.name != "DettagliBianchiOcchiUomo" &&
+                        node.name != "DettagliNeriOcchiDonna" &&
+                        node.name != "DettagliNeriOcchiUomo"
+                    
+                    if (node != self.decorationNode && node != self.backgroundNode && isNotAnEye) {
                         node.geometry!.firstMaterial!.multiply.contents = UIColor.whiteColor()
                     }
                 }
