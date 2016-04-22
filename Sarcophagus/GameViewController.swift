@@ -31,7 +31,8 @@ class GameViewController: UIViewController {
     let minPanY:Float = 0.0
     let maxPanX:Float = 1.6
     let minPanX:Float = -1.6
-    var fingersToPan = 1 //change this from GUI
+    var fingersToRotate = 1 //change this from GUI
+    var fingersToPan = 2
     var panAttenuation: Float = 38000 //100: very fast ---- 1000 very slow
     
     let initialWidthRatio: Float = 0
@@ -51,8 +52,8 @@ class GameViewController: UIViewController {
     let initialPinchScale: Double = 1.1
     let minPinchVelocity = -15.0
     let maxPinchVelocity = 15.0
-    let maxPinch = 1.4
-    let minPinch = 0.4
+    let maxPinch = 1.4 //2.0
+    let minPinch = 0.2
     
     //OVERLAY
     var colorPanelScene = SKScene()
@@ -111,7 +112,7 @@ class GameViewController: UIViewController {
         
         
         
-        let white = UIColor(red:0.96, green:0.93, blue:0.71, alpha:1.00)
+        let white = UIColor(red:0.97, green:0.92, blue:0.67, alpha:1.00)
         let red = UIColor(red:0.64, green:0.29, blue:0.18, alpha:1.00)
         let brown = UIColor(red:0.45, green:0.28, blue:0.22, alpha:1.00)
         let darkBrown = UIColor(red:0.34, green:0.26, blue:0.23, alpha:1.00)
@@ -134,7 +135,7 @@ class GameViewController: UIViewController {
         FunctionAtlas = SKTextureAtlas(named: "FunctionAtlas")
         ColorAtlas = SKTextureAtlas(named: "ColorAtlas")
         
-        ChangeModeButton.texture = fingersToPan == 1 ? FunctionAtlas.textureNamed("OneFinger") : FunctionAtlas.textureNamed("TwoFinger")
+        ChangeModeButton.texture = fingersToRotate == 1 ? FunctionAtlas.textureNamed("RotateMode") : FunctionAtlas.textureNamed("PanMode")
         
     }
     
@@ -222,8 +223,8 @@ class GameViewController: UIViewController {
             lastFingersNumber = numberOfTouches
         }
         
-        //ROTATION pan
-        if (lastFingersNumber==fingersToPan) {
+        //ROTATION
+        if (lastFingersNumber==fingersToRotate) {
             
             let translation = gestureRecognize.translationInView(gestureRecognize.view!)
             
@@ -250,7 +251,7 @@ class GameViewController: UIViewController {
             self.cameraOrbit.eulerAngles.x = Float(-M_PI) * heightRatio
             
             //TRANSLATION pan
-        } else if lastFingersNumber == (fingersToPan+1) {
+        } else if lastFingersNumber == fingersToPan {
             
             let velocity = gestureRecognize.velocityInView(gestureRecognize.view!)
             
@@ -276,7 +277,7 @@ class GameViewController: UIViewController {
         }
         
         if (gestureRecognize.state == .Ended) {
-            if (lastFingersNumber==fingersToPan) {
+            if (lastFingersNumber==fingersToRotate) {
                 lastWidthRatio = widthRatio
                 lastHeightRatio = heightRatio
             }
@@ -331,19 +332,12 @@ class GameViewController: UIViewController {
             print("OVERLAY: tap in \(touchedPointInOverlay)")
             
             if (ChangeModeButton.containsPoint(touchedPointInOverlay)) {
-                print("Change mode: \(fingersToPan)")
+                print("Change mode: \(fingersToRotate)")
                 
-                fingersToPan = fingersToPan == 2 ? 1: 2
+                ChangeModeButton.texture = fingersToRotate == 1 ? FunctionAtlas.textureNamed("PanMode") : FunctionAtlas.textureNamed("RotateMode")
                 
-                if (fingersToPan==1) {
-                    let texture = FunctionAtlas.textureNamed("OneFinger")
-                    ChangeModeButton.texture = texture
-                }
-                
-                if (fingersToPan==2) {
-                    let texture = FunctionAtlas.textureNamed("TwoFinger")
-                    ChangeModeButton.texture = texture
-                }
+                fingersToRotate = fingersToRotate == 1 ? 2 : 1
+                fingersToPan = fingersToPan == 1 ? 2 : 1
                 
                 didPickFunction = true
                 
@@ -358,7 +352,7 @@ class GameViewController: UIViewController {
             }
             
             if (ResetFigureButton.containsPoint(touchedPointInOverlay)) {
-                print("Reset Figure. TODO")
+                print("Reset Figure")
                 didPickFunction = true
                 
                 let nodes = scnView.scene!.rootNode.childNodesPassingTest { (child, stop) -> Bool in
